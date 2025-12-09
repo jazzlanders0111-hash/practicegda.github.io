@@ -1,23 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-01DBYVF17Y"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GA4 Practice Site</title>
 
-  gtag('config', 'G-01DBYVF17Y');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-01DBYVF17Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-01DBYVF17Y');
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      line-height: 1.7;
+    }
+    h1 { color: #333; }
+    button {
+      padding: 12px 18px;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+    button:hover { background: #0056b3; }
+    input, label {
+      display: block;
+      margin: 8px 0;
+    }
+    .section {
+      margin-top: 40px;
+      padding-top: 40px;
+      border-top: 1px solid #ccc;
+    }
+  </style>
+</head>
 <body>
-  <h1>Hello GA4!</h1>
-  <button id="testBtn">Click me</button>
+
+  <h1>GA4 Practice Website</h1>
+  <p>Use this site to test GA4 events, real-time data, and custom tracking.</p>
+
+  <!-- BUTTON CLICK EVENT -->
+  <div class="section">
+    <h2>Button Click Test</h2>
+    <button id="btnTest">Click Me</button>
+  </div>
+
+  <!-- FORM SUBMIT EVENT -->
+  <div class="section">
+    <h2>Form Submission Test</h2>
+    <form id="newsletterForm">
+      <label>Email:</label>
+      <input type="email" required>
+      <button type="submit">Submit Form</button>
+    </form>
+  </div>
+
+  <!-- OUTBOUND CLICK EVENT -->
+  <div class="section">
+    <h2>Outbound Link Test</h2>
+    <a id="outboundLink" href="https://google.com" target="_blank">
+      Visit Google (Outbound Link)
+    </a>
+  </div>
+
+  <!-- SCROLL DEPTH EVENT -->
+  <div class="section" style="height: 1500px;">
+    <h2>Scroll Test</h2>
+    <p>Scroll down this section to trigger scroll depth events.</p>
+  </div>
 
   <script>
-    document.getElementById("testBtn").addEventListener("click", function() {
-        console.log("Button clicked!");
+    // BUTTON CLICK EVENT
+    document.getElementById("btnTest").addEventListener("click", function() {
+      gtag('event', 'button_click', {
+        'button_name': 'test_button'
+      });
+      alert("Button click event sent!");
+    });
+
+    // FORM SUBMIT EVENT
+    document.getElementById("newsletterForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      gtag('event', 'form_submit', {
+        'form_type': 'newsletter'
+      });
+      alert("Form submit event sent!");
+    });
+
+    // OUTBOUND CLICK EVENT
+    document.getElementById("outboundLink").addEventListener("click", function() {
+      gtag('event', 'outbound_click', {
+        'destination': 'https://google.com'
+      });
+    });
+
+    // SCROLL DEPTH EVENT
+    let scrollSent = false;
+    window.addEventListener("scroll", function() {
+      const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      if (!scrollSent && scrollPercent > 50) {
+        gtag('event', 'scroll_depth', {
+          'percent': 50
+        });
+        scrollSent = true;
+        console.log("Scroll depth event fired");
+      }
     });
   </script>
+
 </body>
 </html>
+
