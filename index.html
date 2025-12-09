@@ -1,28 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Google Analytics Practice</title>
+  <title>GA4 Test Site</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-01DBYVF17Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-01DBYVF17Y"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-01DBYVF17Y');
-    </script>
+  gtag('config', 'G-01DBYVF17Y');
+</script>
 </head>
 <body>
-    <h1>Hello! Your GA4 tag is installed.</h1>
-    <p>Click around to test events.</p>
+  <h1>Hello GA4!</h1>
+  <button id="testBtn">Click me</button>
 
-    <button onclick="gtag('event', 'test_event', { value: 1 })">
-      Fire Test Event
-    </button>
+  <script>
+    document.getElementById("testBtn").addEventListener("click", function() {
+        console.log("Button clicked!");
+    });
+  </script>
 </body>
 </html>
-
-
